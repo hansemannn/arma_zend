@@ -7,7 +7,7 @@ use Zend\InputFilter\InputFilterAwareInterface;
 use Zend\InputFilter\InputFilterInterface;
 
 
-abstract class StandardModel implements InputFilterAwareInterface
+abstract class AbstractModel implements InputFilterAwareInterface
 {
 	protected $propertyNames;
 	protected $inputFilter;

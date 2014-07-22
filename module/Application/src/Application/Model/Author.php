@@ -6,7 +6,7 @@ use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\InputFilterInterface;
 
 
-class Author extends StandardModel 
+class Author extends AbstractModel 
 {
 	public $id;
 	public $first_name;

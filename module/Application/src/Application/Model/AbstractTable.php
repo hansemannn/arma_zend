@@ -4,7 +4,7 @@ namespace Application\Model;
 use Zend\Db\TableGateway\TableGateway;
 use Zend\Db\Sql\Select;
 
-class StandardTable
+class AbstractTable
 {
 	protected $tableGateway;
 	protected $orderBy = '';
