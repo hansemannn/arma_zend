@@ -1,0 +1,17 @@
+<h1>Buch hinzufügen</h1>
+<?php
+
+$form = $this->form;
+$form->setAttribute('action', $this->url('book', array('action' => 'add')));
+$form->prepare();
+
+echo $this->form()->openTag($form);
+echo $this->formHidden($form->get('id')->setAttribute('class', 'form-control'));
+echo $this->formRow($form->get('title')->setAttribute('class', 'form-control'));
+echo $this->formRow($form->get('id_author')->setAttribute('class', 'form-control'));
+echo $this->formRow($form->get('pages')->setAttribute('class', 'form-control'));
+echo $this->formRow($form->get('releaseDate')->setAttribute('class', 'form-control'));
+echo '<br/>';
+echo $this->formSubmit($form->get('submit')->setAttribute('class', 'form-control btn-default'));
+echo $this->form()->closeTag();
+

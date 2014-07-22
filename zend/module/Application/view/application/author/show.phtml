@@ -1,0 +1,13 @@
+<h1>Autor anzeigen</h1>
+<table class="table table-striped">
+	<tbody>
+		<tr>
+			<td>Vorname</td><td><?php echo $author->first_name; ?></td>
+		</tr>
+		<tr>
+			<td>Nachname</td><td><?php echo $author->last_name; ?></td>
+		</tr>
+		</tr>
+	</tbody>
+</table>
+<a class="btn btn-default" href="<?php echo $this->url('author');?>">Zurück</a>

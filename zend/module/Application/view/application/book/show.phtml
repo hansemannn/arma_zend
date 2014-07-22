@@ -1,0 +1,16 @@
+<h1>Buch "<?php echo $book->title; ?>"</h1>
+<table class="table table-striped">
+	<tbody>
+		<tr>
+			<td>Titel</td><td><?php echo $book->title; ?></td>
+		</tr>
+		<tr>
+			<td>Seiten</td><td><?php echo $book->pages; ?></td>
+		</tr>
+		<tr>
+			<td>Erscheinungsdatum</td><td><?php echo $book->releaseDate; ?></td>
+		</tr>
+		</tr>
+	</tbody>
+</table>
+<a class="btn btn-default" href="<?php echo $this->url('book');?>">Zurück</a>

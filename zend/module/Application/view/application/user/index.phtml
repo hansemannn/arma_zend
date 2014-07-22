@@ -1,0 +1,26 @@
+<h1>Nutzer</h1>
+<table class="table table-striped">
+	<thead>
+		<tr class="active">
+			<td>Username</td>
+			<td>Passwort</td>
+			<td>Rolle</td>
+			<td>Bearbeiten</td>
+		</tr>
+	</thead>
+	<tbody>
+<?php foreach($this->users as $user): ?>
+<tr>
+	<td><?php echo $user->username; ?></td>
+	<td><?php echo $user->password; ?></td>
+	<td><?php echo $user->role; ?></td>
+	<td>
+		<a class="btn btn-default" href="<?php echo $this->url('user', array('action'=>'show', 'id'=>$user->id)); ?>">Anzeigen</a>&nbsp;
+		<a class="btn btn-default" href="<?php echo $this->url('user', array('action'=>'edit', 'id'=>$user->id)); ?>">Ändern</a>&nbsp;
+		<a class="btn btn-default" href="<?php echo $this->url('user', array('action'=>'delete', 'id'=>$user->id)); ?>" onClick="return confirm('Wirklich löschen?');">Löschen</a>
+	</td>
+</tr>
+<?php endforeach; ?>
+	</tbody>
+</table>
+<a class="btn btn-default" href="<?php echo $this->url('user', array('action' => 'add'));?>">Hinzufügen</a>

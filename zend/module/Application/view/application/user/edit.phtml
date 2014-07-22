@@ -1,0 +1,16 @@
+<h1>Nutzer ändern</h1>
+<?php
+
+$form = $this->form;
+$form->setAttribute('action', $this->url('user', array('action' => 'edit', 'id'     => $this->id)));
+$form->prepare();
+
+echo $this->form()->openTag($form);
+echo $this->formHidden($form->get('id')->setAttribute('class', 'form-control'));
+echo $this->formRow($form->get('username')->setAttribute('class', 'form-control'));
+echo $this->formRow($form->get('password')->setAttribute('class', 'form-control'));
+echo $this->formRow($form->get('role')->setAttribute('class', 'form-control'));
+echo '<br/>';
+echo $this->formSubmit($form->get('submit')->setAttribute('class', 'form-control btn-default'));
+echo $this->form()->closeTag();
+

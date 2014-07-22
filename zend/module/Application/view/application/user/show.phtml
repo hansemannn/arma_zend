@@ -1,0 +1,16 @@
+<h1>Nutzer anzeigen</h1>
+<table class="table table-striped">
+	<tbody>
+		<tr>
+			<td>Username</td><td><?php echo $user->username; ?></td>
+		</tr>
+		<tr>
+			<td>Passwort</td><td><?php echo $user->password; ?></td>
+		</tr>		
+		<tr>
+			<td>Rolle</td><td><?php echo $user->role; ?></td>
+		</tr>
+		</tr>
+	</tbody>
+</table>
+<a class="btn btn-default" href="<?php echo $this->url('user');?>">Zurück</a>

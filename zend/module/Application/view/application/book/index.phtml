@@ -1,0 +1,26 @@
+<h1>Bücher</h1>
+<table class="table table-striped">
+	<thead>
+		<tr class="active">
+			<td>Titel</td>
+			<td>Seiten</td>
+			<td>Erscheinungsdatum</td>
+			<td>Bearbeiten</td>
+		</tr>
+	</thead>
+	<tbody>
+<?php foreach($this->books as $book): ?>
+<tr>
+	<td><?php echo $book->title; ?></td>
+	<td><?php echo $book->pages; ?></td>
+	<td><?php echo $book->releaseDate; ?></td>
+	<td>
+		<a class="btn btn-default" href="<?php echo $this->url('book', array('action'=>'show', 'id'=>$book->id)); ?>">Anzeigen</a>&nbsp;
+		<a class="btn btn-default" href="<?php echo $this->url('book', array('action'=>'edit', 'id'=>$book->id)); ?>">Ändern</a>&nbsp;
+		<a class="btn btn-default" href="<?php echo $this->url('book', array('action'=>'delete', 'id'=>$book->id)); ?>" onClick="return confirm('Wirklich löschen?');">Löschen</a>
+	</td>
+</tr>
+<?php endforeach; ?>
+	</tbody>
+</table>
+<a class="btn btn-default" href="<?php echo $this->url('book', array('action' => 'add'));?>">Hinzufügen</a>

@@ -1,0 +1,15 @@
+<h1>Autor hinzufügen</h1>
+<?php
+
+$form = $this->form;
+$form->setAttribute('action', $this->url('author', array('action' => 'add')));
+$form->prepare();
+
+echo $this->form()->openTag($form);
+echo $this->formHidden($form->get('id')->setAttribute('class', 'form-control'));
+echo $this->formRow($form->get('first_name')->setAttribute('class', 'form-control'));
+echo $this->formRow($form->get('last_name')->setAttribute('class', 'form-control'));
+echo '<br/>';
+echo $this->formSubmit($form->get('submit')->setAttribute('class', 'form-control btn-default'));
+echo $this->form()->closeTag();
+
