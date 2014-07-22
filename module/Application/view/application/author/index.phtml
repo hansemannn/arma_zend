@@ -1,4 +1,6 @@
 <h1>Autoren</h1>
+
+<?php if(count($this->authors) > 0): ?>
 <table class="table table-striped">
 	<thead>
 		<tr class="active">
@@ -21,4 +23,9 @@
 <?php endforeach; ?>
 	</tbody>
 </table>
+<?php else: ?>
+
+<div class="alert alert-warning" role="alert">Keine Autoren vorhanden</div>
+
+<?php endif; ?>
 <a class="btn btn-default" href="<?php echo $this->url('author', array('action' => 'add'));?>">Hinzufügen</a>

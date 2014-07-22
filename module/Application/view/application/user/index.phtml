@@ -1,4 +1,6 @@
 <h1>Nutzer</h1>
+
+<?php if(count($this->users) > 0): ?>
 <table class="table table-striped">
 	<thead>
 		<tr class="active">
@@ -23,4 +25,10 @@
 <?php endforeach; ?>
 	</tbody>
 </table>
+<?php else: ?>
+
+<div class="alert alert-warning" role="alert">Keine Nutzer vorhanden</div>
+
+<?php endif; ?>
+
 <a class="btn btn-default" href="<?php echo $this->url('user', array('action' => 'add'));?>">Hinzufügen</a>

@@ -1,4 +1,6 @@
 <h1>Bücher</h1>
+
+<?php if(count($this->books) > 0): ?>
 <table class="table table-striped">
 	<thead>
 		<tr class="active">
@@ -25,4 +27,9 @@
 <?php endforeach; ?>
 	</tbody>
 </table>
+<?php else: ?>
+
+<div class="alert alert-warning" role="alert">Keine Bücher vorhanden</div>
+
+<?php endif; ?>
 <a class="btn btn-default" href="<?php echo $this->url('book', array('action' => 'add'));?>">Hinzufügen</a>
