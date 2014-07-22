@@ -1,4 +1,4 @@
-<h1>Buch "<?php echo $book->title; ?>"</h1>
+<h1><?php echo $book->title; ?></h1>
 <table class="table table-striped">
 	<tbody>
 		<tr>
@@ -6,6 +6,9 @@
 		</tr>
 		<tr>
 			<td>Seiten</td><td><?php echo $book->pages; ?></td>
+		</tr>
+		<tr>
+			<td>Autor ID</td><td><?php echo $book->id_author; ?></td>
 		</tr>
 		<tr>
 			<td>Erscheinungsdatum</td><td><?php echo $book->releaseDate; ?></td>

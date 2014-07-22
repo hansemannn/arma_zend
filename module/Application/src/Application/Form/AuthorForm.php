@@ -48,6 +48,19 @@ class AuthorForm extends Form
 
 		$this->add(
 			array(
+				'name' => 'author_id',
+				'type' => 'Text',
+				'attributes' => array(
+					'id' => 'author_id',
+				),
+				'options' => array(
+					'label' => 'Autor-ID',
+				)
+			)
+		);
+
+		$this->add(
+			array(
 				'name' => 'submit',
 				'type' => 'Submit',
 				'attributes' => array(
