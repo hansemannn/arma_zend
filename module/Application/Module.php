@@ -45,6 +45,17 @@ class Module
             ),
         );
     }
+    
+    public function getViewHelperConfig() {
+		return array(
+			'factories' => array(
+				'convertdate' => function($sm) {
+					$helper = new View\Helper\Convertdate;
+					return $helper;
+				}
+			)
+		);   
+    }
 
     public function getServiceConfig()
     {
