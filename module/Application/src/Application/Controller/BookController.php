@@ -17,34 +17,23 @@ use Application\Model\Book;
 class BookController extends AbstractActionController
 {
 	protected $bookTable;
+	protected $authorTable;
 
     public function indexAction()
     {
-
-    	/*
-    	
-    	$book = new Book();
-    	$book->title = 'Test';
-    	$book->pages = 454;
-    	$book->id_author = 1;
-    	$book->releaseDate = '2012-01-01';
-
-    	$this->getBookTable()->saveEntry($book);
-    	
-    	*/
-
     	$books = $this->getBookTable()->fetchAll();
-
+    	
         return new ViewModel(
         	array(
-        		'books' => $books,
+        		'books' => $books
         	)
         );
     }
 
     public function addAction()
     {
-    	$form = new BookForm();
+    	$authors = $this->getAuthorTable()->getOptionsArray();
+    	$form = new BookForm($authors);
 
     	$request = $this->getRequest();
     	if ($request->isPost())
@@ -87,7 +76,8 @@ class BookController extends AbstractActionController
     	}
     	
 
-    	$form = new BookForm();
+    	$authors = $this->getAuthorTable()->getOptionsArray();
+    	$form = new BookForm($authors);
     	$form->bind($book);
 
     	$request = $this->getRequest();
@@ -159,5 +149,15 @@ class BookController extends AbstractActionController
     		$this->bookTable = $sm->get('Application\Model\BookTable');
     	}
     	return $this->bookTable;
+    }
+    
+    public function getAuthorTable()
+    {
+    	if (!$this->authorTable)
+    	{
+    		$sm = $this->getServiceLocator();
+    		$this->authorTable = $sm->get('Application\Model\AuthorTable');
+    	}
+    	return $this->authorTable;
     }
 }

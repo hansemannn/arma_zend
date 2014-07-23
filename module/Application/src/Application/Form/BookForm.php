@@ -7,12 +7,18 @@ use Zend\Session\Container;
 
 class BookForm extends Form
 {
-	public function __construct()
+
+	private $authors;
+	
+	public function __construct($authors = array())
 	{
 		parent::__construct('book');
-
+		
+		$this->authors = $authors;		
 		$this->setAttribute('method', 'post');
 
+		array_unshift($this->authors, '-- Bitte auswählen --');
+		
 		$this->add(
 			array(
 				'name' => 'id',
@@ -36,12 +42,13 @@ class BookForm extends Form
 		$this->add(
 			array(
 				'name' => 'id_author',
-				'type' => 'Text',
+				'type' => 'Select',
 				'attributes' => array(
 					'id' => 'book_id_author',
 				),
 				'options' => array(
 					'label' => 'Autor',
+					'options' => $this->authors
 				)
 			)
 		);
