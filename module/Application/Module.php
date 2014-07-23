@@ -30,6 +30,11 @@ class Module
         $eventManager        = $e->getApplication()->getEventManager();
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
+        
+        $viewModel = $e->getApplication()->getMvcEvent()->getViewModel();
+        $authService = $e->getApplication()->getServiceManager()->get('AuthService');
+        $viewModel->loggedIn = $authService->hasIdentity();
+        $viewModel->identity = $authService->getIdentity();
     }
 
     public function getConfig()
@@ -71,6 +76,7 @@ class Module
         return array(
             'factories' => array(
                 'app_navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory',
+                'guest_navigation' => 'Application\Navigation\Service\GuestNavigationFactory',
                 'Application\Model\BookTable' => function($sm)
                 {
                     $tableGateway = $sm->get('BookTableGateway');

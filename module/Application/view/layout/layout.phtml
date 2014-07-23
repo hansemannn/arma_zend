@@ -49,13 +49,13 @@
                     <a class="navbar-brand" href="<?php echo $this->url('home') ?>"><?php echo $this->translate('ARMA-Projektwoche') ?></a>
                 </div>
                 <div class="collapse navbar-collapse">
-        <?php echo $this->navigation('app_navigation')
-        					->menu()
-        					->setMinDepth(0)
-        					->setMaxDepth(0)
-        					->setUlClass('nav navbar-nav')
-        					->render(); 
-        ?>
+			        <?php echo $this->navigation(($this->loggedIn) ? 'app_navigation' : 'guest_navigation')
+			        					->menu()
+			        					->setMinDepth(0)
+			        					->setMaxDepth(0)
+			        					->setUlClass('nav navbar-nav')
+			        					->render(); 
+			        ?>
                 </div><!--/.nav-collapse -->
             </div>
         </nav>

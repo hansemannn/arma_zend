@@ -148,8 +148,20 @@ return array(
 				'route' => 'user'
 			),
 			array(
+				'label' => 'Logout',
+				'route' => 'login',
+				'action' => 'logout'
+			)
+		),
+    	'guest' => array(
+			array(
+				'label' => 'Bücher',
+				'route' => 'book'
+			),
+			array(
 				'label' => 'Login',
-				'route' => 'login'
+				'route' => 'login',
+				'action' => 'login'
 			)
 		)
     )	
