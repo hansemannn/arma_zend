@@ -1,31 +1,37 @@
 <h1>Autoren</h1>
 
-<?php if(count($this->authors) > 0): ?>
-<table class="table table-striped">
-	<thead>
-		<tr class="active">
-			<td>Vorname</td>
-			<td>Nachname</td>
-			<td>Bearbeiten</td>
-		</tr>
-	</thead>
-	<tbody>
-<?php foreach($this->authors as $author): ?>
-<tr>
-	<td><?php echo $author->first_name; ?></td>
-	<td><?php echo $author->last_name; ?></td>
-	<td>
-		<a class="btn btn-default" href="<?php echo $this->url('author', array('action'=>'show', 'id'=>$author->id)); ?>">Anzeigen</a>&nbsp;
-		<a class="btn btn-default" href="<?php echo $this->url('author', array('action'=>'edit', 'id'=>$author->id)); ?>">Ändern</a>&nbsp;
-		<a class="btn btn-default" href="<?php echo $this->url('author', array('action'=>'delete', 'id'=>$author->id)); ?>" onClick="return confirm('Wirklich löschen?');">Löschen</a>
-	</td>
-</tr>
-<?php endforeach; ?>
-	</tbody>
-</table>
-<?php else: ?>
+<?php if(count($this->authors) > 0):
+	echo $this->datatable($this->authors, 'author', array(
+		'keys' => array(
+			array(
+				'name' => 'first_name',
+				'headline' => 'Vorname'
+			),
+			array(
+				'name' => 'last_name',
+				'headline' => 'Nachname'
+			)
+		),
+		'actions' => array(
+			array(
+				'name' => 'show',
+				'title' => 'Anzeigen'
+			),			
+			array(
+				'name' => 'edit',
+				'title' => 'Bearbeiten'
+			),			
+			array(
+				'name' => 'delete',
+				'title' => 'Löschen'
+			),
+		)
+	));
+else: 
+?>
 
 <div class="alert alert-warning" role="alert">Keine Autoren vorhanden</div>
 
-<?php endif; ?>
+<?php  endif;  ?>
+
 <a class="btn btn-default" href="<?php echo $this->url('author', array('action' => 'add'));?>">Hinzufügen</a>
