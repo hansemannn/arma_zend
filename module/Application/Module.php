@@ -19,6 +19,8 @@ use Application\Model\User;
 use Application\Model\UserTable;
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\TableGateway\TableGateway;
+use Zend\Authentication\Adapter\DbTable as DbTableAuthAdapter;
+use Zend\Authentication\AuthenticationService;
 
 
 class Module
@@ -68,6 +70,7 @@ class Module
     {
         return array(
             'factories' => array(
+                'app_navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory',
                 'Application\Model\BookTable' => function($sm)
                 {
                     $tableGateway = $sm->get('BookTableGateway');
@@ -107,7 +110,17 @@ class Module
                     $resultSetPrototype->setArrayObjectPrototype(new User());
                     return new TableGateway('user', $dbAdapter, null, $resultSetPrototype);
                 },
-                'app_navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory'
+                'AuthService' => function($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $dbTableAuthAdapter = new DbTableAuthAdapter($dbAdapter, 
+                    	'user', 'username', 'password', 'MD5(?)'
+                    );
+                    
+                    $authService = new \Zend\Authentication\AuthenticationService();
+                    $authService->setAdapter($dbTableAuthAdapter);
+                    
+                    return $authService;
+                }
             ),
         );
     }
