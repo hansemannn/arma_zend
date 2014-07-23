@@ -88,7 +88,8 @@ class Module
                     $resultSetPrototype = new ResultSet();
                     $resultSetPrototype->setArrayObjectPrototype(new User());
                     return new TableGateway('user', $dbAdapter, null, $resultSetPrototype);
-                }
+                },
+                'app_navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory'
             ),
         );
     }

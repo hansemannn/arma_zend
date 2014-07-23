@@ -148,4 +148,20 @@ return array(
             ),
         ),
     ),
+    'navigation' => array(
+    	'default' => array(
+			array(
+				'label' => 'Bücher',
+				'route' => 'book'
+			),
+			array(
+				'label' => 'Autoren',
+				'route' => 'author'
+			),
+			array(
+				'label' => 'Nutzer',
+				'route' => 'user'
+			)
+		)
+    )	
 );
