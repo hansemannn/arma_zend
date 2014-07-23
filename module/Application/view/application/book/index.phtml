@@ -1,35 +1,46 @@
 <h1>Bücher</h1>
 
-<?php if(count($this->books) > 0): ?>
-<table class="table table-striped">
-	<thead>
-		<tr class="active">
-			<td>Titel</td>
-			<td>Seiten</td>
-			<td>Autor ID</td>
-			<td>Erscheinungsdatum</td>
-			<td>Bearbeiten</td>
-		</tr>
-	</thead>
-	<tbody>
-<?php foreach($this->books as $book): ?>
-<tr>
-	<td><?php echo $book->title; ?></td>
-	<td><?php echo $book->pages; ?></td>
-	<td><?php echo $book->id_author; ?></td>
-	<td><?php echo $this->convertdate($book->releaseDate); ?></td>
-	<td>
-		<a class="btn btn-default" href="<?php echo $this->url('book', array('action'=>'show', 'id'=>$book->id)); ?>">Anzeigen</a>&nbsp;
-		<a class="btn btn-default" href="<?php echo $this->url('book', array('action'=>'edit', 'id'=>$book->id)); ?>">Ändern</a>&nbsp;
-		<a class="btn btn-default" href="<?php echo $this->url('book', array('action'=>'delete', 'id'=>$book->id)); ?>" onClick="return confirm('Wirklich löschen?');">Löschen</a>
-	</td>
-</tr>
-<?php endforeach; ?>
-	</tbody>
-</table>
-<?php else: ?>
+<?php if(count($this->books) > 0):
+	echo $this->datatable($this->books, 'book', array(
+		'keys' => array(
+			array(
+				'name' => 'title',
+				'headline' => 'Titel'
+			),
+			array(
+				'name' => 'pages',
+				'headline' => 'Seiten'
+			),
+			array(
+				'name' => 'id_author',
+				'headline' => 'Autor ID'
+			),
+			array(
+				'name' => 'releaseDate',
+				'type' => 'date',
+				'headline' => 'Erscheinungsdatum'
+			)
+		),
+		'actions' => array(
+			array(
+				'name' => 'show',
+				'title' => 'Anzeigen'
+			),			
+			array(
+				'name' => 'edit',
+				'title' => 'Bearbeiten'
+			),			
+			array(
+				'name' => 'delete',
+				'title' => 'Löschen'
+			),
+		)
+	));
+else: 
+?>
+	<div class="alert alert-warning" role="alert">Keine Bücher vorhanden</div>
+<?php 
+endif; 
+?>
 
-<div class="alert alert-warning" role="alert">Keine Bücher vorhanden</div>
-
-<?php endif; ?>
 <a class="btn btn-default" href="<?php echo $this->url('book', array('action' => 'add'));?>">Hinzufügen</a>

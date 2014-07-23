@@ -52,6 +52,10 @@ class Module
 				'convertdate' => function($sm) {
 					$helper = new View\Helper\Convertdate;
 					return $helper;
+				},
+				'datatable' => function($sm) {
+					$helper = new View\Helper\Datatable;
+					return $helper;
 				}
 			)
 		);   
