@@ -57,6 +57,9 @@ class Module
 					$helper = new View\Helper\Datatable;
 					return $helper;
 				}
+			),
+			'invokables' => array(
+				'formdate' => 'Application\Form\View\Helper\Datepicker'
 			)
 		);   
     }

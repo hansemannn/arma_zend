@@ -69,9 +69,9 @@ class BookForm extends Form
 		$this->add(
 			array(
 				'name' => 'releaseDate',
-				'type' => 'Text',
+				'type' => 'Date',
 				'attributes' => array(
-					'id' => 'book_releaseDate',
+					'id' => 'book_releaseDate'
 				),
 				'options' => array(
 					'label' => 'Erscheinungsdatum',
