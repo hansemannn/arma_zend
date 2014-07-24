@@ -6,21 +6,25 @@
 
 return array(
     'book' => array(
-        'all' => array(0, 2),
-        'index' => array(1),
+        'all' => array('admin', 'user'),
+        'index' => array('guest'),
     ),
     'author' => array(
-        'all' => array(0, 2)
+        'all' => array('admin', 'member')
     ),
     'login' => array(
-        'all' => array(0, 1, 2)
+        'all' => array('admin', 'guest', 'user')
     ),
     'home' => array(
-        'all' => array(0, 1, 2)
+        'all' => array('admin', 'guest', 'user')
     ),
     'user' => array(
-        'all' => array(0)
+        'all' => array('admin')
     ),
+    'logout' => array(
+        'all' => array('admin', 'user')
+    ),
+
     
 
    /*'febook' => array(
