@@ -55,7 +55,20 @@
 			        					->setMaxDepth(0)
 			        					->setUlClass('nav navbar-nav')
 			        					->render(); 
-			        ?>
+			        
+			        if($this->loggedIn): ?>
+			        
+			        <ul class="nav navbar-nav navbar-right">
+				        <li class="dropdown">
+				          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Eingeloggt als <strong><?php echo $this->identity->username ?></strong> <span class="caret"></span></a>
+				          <ul class="dropdown-menu" role="menu">
+				            <li><a href="<?php echo $this->url('logout') ?>">Logout</a></li>
+				          </ul>
+				        </li>
+			      </ul>
+			      
+			      <?php endif; ?>
+			        
                 </div><!--/.nav-collapse -->
             </div>
         </nav>

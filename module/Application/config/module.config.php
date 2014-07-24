@@ -34,6 +34,21 @@ return array(
                         'action'     => 'login',
                     ),
                 ),
+            ),              
+            
+            'logout' => array(
+                'type' => 'segment',
+                'options' => array(
+                    'route'    => '/logout[/][:action][/:id]',
+                    'constraints' => array(
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id' => '[0-9]*',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Login',
+                        'action'     => 'logout',
+                    ),
+                ),
             ),  
 
             'book' => array(
@@ -146,12 +161,12 @@ return array(
 			array(
 				'label' => 'Nutzer',
 				'route' => 'user'
-			),
+			)/*, ====> Ersetzt durch Dropdown-Logout
 			array(
 				'label' => 'Logout',
 				'route' => 'login',
 				'action' => 'logout'
-			)
+			)*/
 		),
     	'guest' => array(
 			array(
