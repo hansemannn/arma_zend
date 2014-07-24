@@ -6,20 +6,20 @@
 
 return array(
     'book' => array(
-        'all' => array('0'),
-        'index' => array('1'),
+        'all' => array(0, 2),
+        'index' => array(1),
     ),
     'author' => array(
-        'all' => array('0')
+        'all' => array(0, 2)
     ),
     'login' => array(
-        'all' => array('0', '1', '2')
+        'all' => array(0, 1, 2)
     ),
     'home' => array(
-        'all' => array('0', '1', '2')
+        'all' => array(0, 1, 2)
     ),
     'user' => array(
-        'all' => array('0', '1', '2')
+        'all' => array(0)
     ),
     
 

@@ -161,12 +161,17 @@ return array(
 			array(
 				'label' => 'Nutzer',
 				'route' => 'user'
-			)/*, ====> Ersetzt durch Dropdown-Logout
+			)
+		),
+    	'member' => array(
 			array(
-				'label' => 'Logout',
-				'route' => 'login',
-				'action' => 'logout'
-			)*/
+				'label' => 'Bücher',
+				'route' => 'book'
+			),
+			array(
+				'label' => 'Autoren',
+				'route' => 'author'
+			)
 		),
     	'guest' => array(
 			array(

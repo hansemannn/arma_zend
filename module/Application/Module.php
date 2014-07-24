@@ -82,6 +82,7 @@ class Module
             'factories' => array(
                 'app_navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory',
                 'guest_navigation' => 'Application\Navigation\Service\GuestNavigationFactory',
+                'member_navigation' => 'Application\Navigation\Service\MemberNavigationFactory',
                 'Application\Model\BookTable' => function($sm)
                 {
                     $tableGateway = $sm->get('BookTableGateway');
