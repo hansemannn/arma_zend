@@ -30,7 +30,12 @@ class Module
         $eventManager        = $e->getApplication()->getEventManager();
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
+ 
+		// ACL
+        $this->initAcl($e);
+        $e->getApplication()->getEventManager()->attach('route', array($this, 'checkAcl'));
         
+        // AuthService
         $viewModel = $e->getApplication()->getMvcEvent()->getViewModel();
         $authService = $e->getApplication()->getServiceManager()->get('AuthService');
         $viewModel->loggedIn = $authService->hasIdentity();
@@ -129,5 +134,88 @@ class Module
                 }
             ),
         );
+    }
+
+
+    public function initAcl(MvcEvent $e) {
+ 
+
+        $acl = new \Zend\Permissions\Acl\Acl();
+        $acls = include __DIR__ . '/../../config/autoload/acl.php';
+        $allResources = array();
+        $allRoles = array();
+
+        foreach($acls as $resource => $actions)
+        {
+            foreach($actions as $action => $roles) 
+            {
+                $resourceString = $resource.'/'.$action;
+                if(!$acl->hasResource($resourceString))
+                {
+                    $acl->addResource(new \Zend\Permissions\Acl\Resource\GenericResource($resourceString));
+                }
+                foreach($roles as $role)
+                {
+                    if (!in_array($role, $allRoles))
+                    {
+                        $allRoles[] = $role;
+                        $role = new \Zend\Permissions\Acl\Role\GenericRole($role);
+                        $acl->addRole($role);                                         
+                    }    
+                    $acl->allow($role, $resourceString);
+                }
+            }
+        }
+
+        //setting to view
+        $e->getViewModel()->acl = $acl;
+    }
+     
+    public function checkAcl(MvcEvent $e) 
+    {
+        $userRole = 1;
+        $app            = $e->getTarget();
+        $serviceManager = $app->getServiceManager();
+        $authService         = $serviceManager->get('AuthService');
+
+        if ($authService->hasIdentity())
+        {
+            $user = $authService->getStorage()->read();
+            
+            $userRole = $user->role;
+        }
+        $controller = $e->getRouteMatch()->getMatchedRouteName('controller');
+        $action = $e->getRouteMatch()->getParam('action');
+        $route = $controller.'/'.$action;
+        $allAccess = false;
+        if ($e->getViewModel()->acl->hasResource($controller.'/all'))
+        {
+            if ($e->getViewModel()->acl->isAllowed($userRole, $controller.'/all')) 
+            {
+                $allAccess = true; 
+            }
+        }
+
+        if (!$allAccess)
+        {
+            if ($e->getViewModel()->acl->hasResource($route))
+            {
+                if (!$e->getViewModel()->acl->isAllowed($userRole, $route)) 
+                {
+                    $e->getApplication()->getEventManager()->getSharedManager()->attach('Zend\Mvc\Controller\AbstractActionController', 'dispatch', function($e) {
+                        $controller = $e->getTarget();
+                        $controller->plugin('redirect')->toRoute('home');
+                    }, 100);    
+                }
+            
+            }
+            else
+            {
+                $e->getApplication()->getEventManager()->getSharedManager()->attach('Zend\Mvc\Controller\AbstractActionController', 'dispatch', function($e) {
+                        $controller = $e->getTarget();
+                        $controller->plugin('redirect')->toRoute('home');
+                    }, 100);  
+            }
+        }
     }
 }
