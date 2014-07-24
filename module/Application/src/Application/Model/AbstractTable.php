@@ -41,8 +41,8 @@ class AbstractTable
 
 		$data = array();
 		foreach($this->fields as $field)
-		{
-			$data[$field] = $entry->$field;
+		{	
+			$data[$field] = ($field == 'password') ? md5($entry->$field) : $entry->$field;
 		}
 
 		if ($id == 0)
