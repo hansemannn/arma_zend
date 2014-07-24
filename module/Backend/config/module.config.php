@@ -19,7 +19,7 @@ return array(
                         'id' => '[0-9]*',
                     ),
                     'defaults' => array(
-                        'controller' => 'Application\Controller\User',
+                        'controller' => 'Backend\Controller\User',
                         'action'     => 'index',
                     ),
                 ),
@@ -47,7 +47,7 @@ return array(
     ),
     'controllers' => array(
         'invokables' => array(
-            'Application\Controller\Login' => 'Application\Controller\LoginController'
+            'Backend\Controller\User' => 'Backend\Controller\UserController'
         ),
     ),
     'view_manager' => array(
