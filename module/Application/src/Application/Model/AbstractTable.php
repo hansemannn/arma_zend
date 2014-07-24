@@ -4,7 +4,7 @@ namespace Application\Model;
 use Zend\Db\TableGateway\TableGateway;
 use Zend\Db\Sql\Select;
 
-class AbstractTable
+abstract class AbstractTable
 {
 	protected $tableGateway;
 	protected $orderBy = '';
@@ -25,13 +25,13 @@ class AbstractTable
 				{
 					$select->order($orderBy);
 				}
-			);	
+			);
 		}
 		else
 		{
 			$resultSet = $this->tableGateway->select();
 		}
-		
+
 		return $resultSet;
 	}
 
@@ -41,7 +41,7 @@ class AbstractTable
 
 		$data = array();
 		foreach($this->fields as $field)
-		{	
+		{
 			$data[$field] = ($field == 'password') ? md5($entry->$field) : $entry->$field;
 		}
 

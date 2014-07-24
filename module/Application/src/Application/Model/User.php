@@ -6,19 +6,20 @@ use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\InputFilterInterface;
 
 
-class User extends AbstractModel 
+class User extends AbstractModel
 {
 	public $id;
 	public $username;
+	public $role;
 	public $password;
-	
+
 	protected $inputFilter;
 	protected $fields;
 
 	public function __construct() {
 		$this->propertyNames = array(
-			'id', 
-			'username', 
+			'id',
+			'username',
 			'password',
 			'role'
 		);
@@ -65,7 +66,7 @@ class User extends AbstractModel
 					)
 				)
 			);
-			
+
 			$inputFilter->add(
 				$factory->createInput(
 					array(
@@ -88,7 +89,7 @@ class User extends AbstractModel
 					)
 				)
 			);
-			
+
 			$inputFilter->add(
 				$factory->createInput(
 					array(
@@ -106,4 +107,3 @@ class User extends AbstractModel
 		return $this->inputFilter;
 	}
 }
-

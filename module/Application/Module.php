@@ -30,11 +30,11 @@ class Module
         $eventManager        = $e->getApplication()->getEventManager();
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
- 
+
 		// ACL
         $this->initAcl($e);
         $e->getApplication()->getEventManager()->attach('route', array($this, 'checkAcl'));
-        
+
         // AuthService
         $viewModel = $e->getApplication()->getMvcEvent()->getViewModel();
         $authService = $e->getApplication()->getServiceManager()->get('AuthService');
@@ -57,7 +57,7 @@ class Module
             ),
         );
     }
-    
+
     public function getViewHelperConfig() {
 		return array(
 			'factories' => array(
@@ -73,7 +73,7 @@ class Module
 			'invokables' => array(
 				'formdate' => 'Application\Form\View\Helper\Datepicker'
 			)
-		);   
+		);
     }
 
     public function getServiceConfig()
@@ -100,7 +100,7 @@ class Module
                     $tableGateway = $sm->get('UserTableGateway');
                     $table = new UserTable($tableGateway);
                     return $table;
-                },                
+                },
                 'BookTableGateway' => function($sm)
                 {
                     $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
@@ -124,13 +124,13 @@ class Module
                 },
                 'AuthService' => function($sm) {
                     $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
-                    $dbTableAuthAdapter = new DbTableAuthAdapter($dbAdapter, 
+                    $dbTableAuthAdapter = new DbTableAuthAdapter($dbAdapter,
                     	'user', 'username', 'password', 'MD5(?)'
                     );
-                    
+
                     $authService = new \Zend\Authentication\AuthenticationService();
                     $authService->setAdapter($dbTableAuthAdapter);
-                    
+
                     return $authService;
                 }
             ),
@@ -139,7 +139,7 @@ class Module
 
 
     public function initAcl(MvcEvent $e) {
- 
+
 
         $acl = new \Zend\Permissions\Acl\Acl();
         $acls = include __DIR__ . '/../../config/autoload/acl.php';
@@ -148,7 +148,7 @@ class Module
 
         foreach($acls as $resource => $actions)
         {
-            foreach($actions as $action => $roles) 
+            foreach($actions as $action => $roles)
             {
                 $resourceString = $resource.'/'.$action;
                 if(!$acl->hasResource($resourceString))
@@ -161,8 +161,8 @@ class Module
                     {
                         $allRoles[] = $role;
                         $role = new \Zend\Permissions\Acl\Role\GenericRole($role);
-                        $acl->addRole($role);                                         
-                    }    
+                        $acl->addRole($role);
+                    }
                     $acl->allow($role, $resourceString);
                 }
             }
@@ -171,18 +171,18 @@ class Module
         //setting to view
         $e->getViewModel()->acl = $acl;
     }
-     
-    public function checkAcl(MvcEvent $e) 
+
+    public function checkAcl(MvcEvent $e)
     {
-        $userRole = 1;
-        $app            = $e->getTarget();
+        $userRole = 'guest';
+        $app = $e->getTarget();
         $serviceManager = $app->getServiceManager();
-        $authService         = $serviceManager->get('AuthService');
+        $authService = $serviceManager->get('AuthService');
 
         if ($authService->hasIdentity())
         {
             $user = $authService->getStorage()->read();
-            
+
             $userRole = $user->role;
         }
         $controller = $e->getRouteMatch()->getMatchedRouteName('controller');
@@ -191,9 +191,9 @@ class Module
         $allAccess = false;
         if ($e->getViewModel()->acl->hasResource($controller.'/all'))
         {
-            if ($e->getViewModel()->acl->isAllowed($userRole, $controller.'/all')) 
+            if ($e->getViewModel()->acl->isAllowed($userRole, $controller.'/all'))
             {
-                $allAccess = true; 
+                $allAccess = true;
             }
         }
 
@@ -201,10 +201,10 @@ class Module
         {
             if ($e->getViewModel()->acl->hasResource($route))
             {
-                if (!$e->getViewModel()->acl->isAllowed($userRole, $route)) 
+                if (!$e->getViewModel()->acl->isAllowed($userRole, $route))
                 {
                     $e->getRouteMatch()
-                    ->setParam('controller', 'Application\Controller\Index')
+                    ->setParam('controller', 'Frontend\Controller\Book')
                     ->setParam('action', 'index');
                 }
             }
@@ -215,7 +215,7 @@ class Module
                         $controller->plugin('redirect')->toRoute('home');
                     }, 100);*/
                 $e->getRouteMatch()
-                ->setParam('controller', 'Application\Controller\Index')
+                ->setParam('controller', 'Frontend\Controller\Book')
                 ->setParam('action', 'index');
             }
         }

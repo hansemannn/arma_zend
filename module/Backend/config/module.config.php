@@ -10,35 +10,20 @@
 return array(
     'router' => array(
         'routes' => array(
-            'login' => array(
+            'user' => array(
                 'type' => 'segment',
                 'options' => array(
-                    'route'    => '/login[/][:action][/:id]',
+                    'route'    => '/user[/][:action][/:id]',
                     'constraints' => array(
                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                         'id' => '[0-9]*',
                     ),
                     'defaults' => array(
-                        'controller' => 'Application\Controller\Login',
-                        'action'     => 'login',
+                        'controller' => 'Application\Controller\User',
+                        'action'     => 'index',
                     ),
                 ),
-            ),
-
-            'logout' => array(
-                'type' => 'segment',
-                'options' => array(
-                    'route'    => '/logout[/][:action][/:id]',
-                    'constraints' => array(
-                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                        'id' => '[0-9]*',
-                    ),
-                    'defaults' => array(
-                        'controller' => 'Application\Controller\Login',
-                        'action'     => 'logout',
-                    ),
-                ),
-            ),
+            )
         ),
     ),
     'service_manager' => array(
@@ -62,10 +47,6 @@ return array(
     ),
     'controllers' => array(
         'invokables' => array(
-            'Application\Controller\Index' => 'Application\Controller\IndexController',
-            'Application\Controller\Book' => 'Application\Controller\BookController',
-            'Application\Controller\Author' => 'Application\Controller\AuthorController',
-            'Application\Controller\User' => 'Application\Controller\UserController',
             'Application\Controller\Login' => 'Application\Controller\LoginController'
         ),
     ),
@@ -76,8 +57,7 @@ return array(
         'not_found_template'       => 'error/404',
         'exception_template'       => 'error/index',
         'template_map' => array(
-            'layout/layout'           => __DIR__ . '/../view/layout/layout.phtml',
-            'application/index/index' => __DIR__ . '/../view/application/index/index.phtml',
+            'layout/layout'           => __DIR__ . '/../../Application/view/layout/layout.phtml',
             'error/404'               => __DIR__ . '/../view/error/404.phtml',
             'error/index'             => __DIR__ . '/../view/error/index.phtml',
         ),
@@ -92,41 +72,4 @@ return array(
             ),
         ),
     ),
-    'navigation' => array(
-    	'default' => array(
-			array(
-				'label' => 'Bücher',
-				'route' => 'book'
-			),
-			array(
-				'label' => 'Autoren',
-				'route' => 'author'
-			),
-			array(
-				'label' => 'Nutzer',
-				'route' => 'user'
-			)
-		),
-    	'member' => array(
-			array(
-				'label' => 'Bücher',
-				'route' => 'book'
-			),
-			array(
-				'label' => 'Autoren',
-				'route' => 'author'
-			)
-		),
-    	'guest' => array(
-			array(
-				'label' => 'Bücher',
-				'route' => 'book'
-			),
-			array(
-				'label' => 'Login',
-				'route' => 'login',
-				'action' => 'login'
-			)
-		)
-    )
 );
