@@ -11,7 +11,7 @@ namespace Backend\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use Application\Form\UserForm;
+use Backend\Form\UserForm;
 use Application\Model\User;
 
 class UserController extends AbstractActionController

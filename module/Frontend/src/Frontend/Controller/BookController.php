@@ -11,7 +11,7 @@ namespace Frontend\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use Application\Form\BookForm;
+use Backend\Form\BookForm;
 use Application\Model\Book;
 
 class BookController extends AbstractActionController

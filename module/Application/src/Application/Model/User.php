@@ -96,8 +96,9 @@ class User extends AbstractModel
 						'name' => 'role',
 						'required' => true,
 						'filters' => array(
-							array('name' => 'Int')
-						)
+							array('name' => 'StripTags'),
+							array('name' => 'StringTrim')
+						),
 					)
 				)
 			);

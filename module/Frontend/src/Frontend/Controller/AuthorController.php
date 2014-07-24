@@ -11,7 +11,7 @@ namespace Frontend\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use Application\Form\AuthorForm;
+use Backend\Form\AuthorForm;
 use Application\Model\Author;
 
 class AuthorController extends AbstractActionController
