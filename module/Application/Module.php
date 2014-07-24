@@ -203,19 +203,20 @@ class Module
             {
                 if (!$e->getViewModel()->acl->isAllowed($userRole, $route)) 
                 {
-                    $e->getApplication()->getEventManager()->getSharedManager()->attach('Zend\Mvc\Controller\AbstractActionController', 'dispatch', function($e) {
-                        $controller = $e->getTarget();
-                        $controller->plugin('redirect')->toRoute('home');
-                    }, 100);    
+                    $e->getRouteMatch()
+                    ->setParam('controller', 'Application\Controller\Index')
+                    ->setParam('action', 'index');
                 }
-            
             }
             else
             {
-                $e->getApplication()->getEventManager()->getSharedManager()->attach('Zend\Mvc\Controller\AbstractActionController', 'dispatch', function($e) {
+                /*$e->getApplication()->getEventManager()->getSharedManager()->attach('Zend\Mvc\Controller\AbstractActionController', 'dispatch', function($e) {
                         $controller = $e->getTarget();
                         $controller->plugin('redirect')->toRoute('home');
-                    }, 100);  
+                    }, 100);*/
+                $e->getRouteMatch()
+                ->setParam('controller', 'Application\Controller\Index')
+                ->setParam('action', 'index');
             }
         }
     }
