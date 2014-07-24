@@ -49,7 +49,7 @@
                     <a class="navbar-brand" href="<?php echo $this->url('home') ?>"><?php echo $this->translate('ARMA-Projektwoche') ?></a>
                 </div>
                 <div class="collapse navbar-collapse">
-			        <?php echo $this->navigation(($this->loggedIn) ? ($this->identity->role == 2) ? 'member_navigation' : 'app_navigation' : 'guest_navigation')
+			        <?php echo $this->navigation(($this->loggedIn) ? ($this->identity->role == 'member') ? 'member_navigation' : 'app_navigation' : 'guest_navigation')
 			        					->menu()
 			        					->setMinDepth(0)
 			        					->setMaxDepth(0)
