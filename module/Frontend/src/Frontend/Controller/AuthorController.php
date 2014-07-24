@@ -7,7 +7,7 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace Backend\Controller;
+namespace Frontend\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
@@ -21,13 +21,13 @@ class AuthorController extends AbstractActionController
     public function indexAction()
     {
     	/*
-    	
+
     	$author = new Author();
     	$author->first_name = 'Hans';
     	$author->last_name = 'Knoechel';
 
     	$this->getAuthorTable()->saveEntry($author);
-    	
+
     	*/
 
     	$authors = $this->getAuthorTable()->fetchAll();
@@ -74,7 +74,7 @@ class AuthorController extends AbstractActionController
     		return $this->redirect()->toRoute('author');
     	}
 
-    	try 
+    	try
     	{
     		$author = $this->getAuthorTable()->getEntry($id);
     	}
@@ -82,7 +82,7 @@ class AuthorController extends AbstractActionController
     	{
     		return $this->redirect()->toRoute('author');
     	}
-    	
+
 
     	$form = new AuthorForm();
     	$form->bind($author);
